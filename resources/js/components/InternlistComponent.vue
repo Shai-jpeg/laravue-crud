@@ -14,10 +14,11 @@
                             v-model="paginate"
                             class="form-control form-control-sm"
                         >
-                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
                             <option value="20">20</option>
-                            <option value="30">30</option>
                         </select>
+                        <label for="paginate"> Page</label>
                     </div>
                 </div>
                <div class="ml-8 pt-2 relative mx-auto text-gray-600">
@@ -43,7 +44,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr v-for="item in internList" :key="item.id">
+            <tr v-for="item in internlist" :key="item.id">
                 <td class="p-3 text-center">{{ item.last_name}}</td>
                 <td class="p-3 text-center">{{ item.first_name}}</td>
                 <td class="p-3 text-center">{{ item.contact_number}}</td>
@@ -76,7 +77,7 @@
 
 <script>
 export default {
-    props: ('internlists'),
+    props: ('internlist'),
      data(){
          return{
              internlistList: this.internlist,
@@ -96,28 +97,18 @@ export default {
              }
          }
      },
-     methods:{
-         submit(){
-             const vm= this;
-             axios.post('/internlist', this.form)
-             .then(function (response){
-                 vm.internList.push(response.data.data);
-                 vm.form.last_name = null
-                 vm.form.first_name = null
-                 vm.form.date_of_birth = null
-                 vm.form.contact_number= null
-                 vm.form.email_address = null
-                 vm.form.address = null
-                 vm.form.department =null
-                 vm.form.position = null
-                 vm.form.intern_start = null
-                 vm.form.intern_end = null
-                 vm.form.required_hours = null
-             })
-             .catch(function (error){
-                 alert('Something went wrong')
-             });
-         }
-     }
-}
+      mounted() {
+        this.getResults();
+    },
+    methods: {
+        getResults(page = 1) {
+            axios.get("/tabledata?page=" + page).then(response => {
+                this.internlist = response.data;
+            });
+        }
+    }
+};
 </script>
+
+
+
