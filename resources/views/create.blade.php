@@ -30,6 +30,8 @@
         <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Internlist Form</h1>
       </div>
     </div>
+
+    
 @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Kindly please enter information of Intern</strong>

@@ -1967,18 +1967,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      internlist: {}
+      internlists: {}
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    getInternlists: function getInternlists() {
+      var _this = this;
 
-    axios.get('/api/internlists').then(function (response) {
-      _this.internlist = response.data.data;
-    });
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('/api/internlists?page=' + page).then(function (response) {
+        _this.internlists = response.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getInternlists();
   }
 });
 
@@ -2023,7 +2033,7 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
  */
 
 var app = new Vue({
-  el: "#app"
+  el: '#app'
 });
 
 /***/ }),
@@ -38712,39 +38722,43 @@ var render = function() {
                       }
                     },
                     [
-                      _c("option", { attrs: { value: "5" } }, [_vm._v("5")]),
-                      _vm._v(" "),
                       _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "20" } }, [_vm._v("20")])
+                      _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "30" } }, [_vm._v("30")])
                     ]
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-15 col-md-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "search", placeholder: "Search" },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
+                      }
+                    })
+                  ])
                 ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model.lazy",
-                      value: _vm.search,
-                      expression: "search",
-                      modifiers: { lazy: true }
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "search" },
-                  domProps: { value: _vm.search },
-                  on: {
-                    change: function($event) {
-                      _vm.search = $event.target.value
-                    }
-                  }
-                })
-              ])
+              )
             ])
           ]),
+          _vm._v(" "),
+          _c("br"),
           _vm._v(" "),
           _c("div", { staticClass: " ml-8 overflow-x-auto" }, [
             _c("div", { staticClass: " ml-8 bg-white shadow-md rounded " }, [
@@ -38753,38 +38767,38 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.internlist, function(item) {
-                    return _c("tr", { key: item.id }, [
+                  _vm._l(_vm.internlists, function(intern) {
+                    return _c("tr", { key: intern.id }, [
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.id))
+                        _vm._v(_vm._s(intern.id))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.last_name))
+                        _vm._v(_vm._s(intern.last_name))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.first_name))
+                        _vm._v(_vm._s(intern.first_name))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.contact_number))
+                        _vm._v(_vm._s(intern.contact_number))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.department))
+                        _vm._v(_vm._s(intern.department))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.position))
+                        _vm._v(_vm._s(intern.position))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.intern_start))
+                        _vm._v(_vm._s(intern.intern_start))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(item.intern_end))
+                        _vm._v(_vm._s(intern.intern_end))
                       ]),
                       _vm._v(" "),
                       _vm._m(1, true)
@@ -38794,6 +38808,20 @@ var render = function() {
                 )
               ])
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mt-4" }, [
+            _c(
+              "div",
+              { staticClass: "col-sm-6 offset-5" },
+              [
+                _c("pagination", {
+                  attrs: { data: _vm.internlists },
+                  on: { "pagination-change-page": _vm.getInternlists }
+                })
+              ],
+              1
+            )
           ])
         ])
       ])

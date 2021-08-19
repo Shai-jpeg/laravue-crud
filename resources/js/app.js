@@ -32,5 +32,5 @@ Vue.component('pagination', require('laravel-vue-pagination'));
  */
 
  const app = new Vue({
-    el: "#app"
+    el: '#app',
 });

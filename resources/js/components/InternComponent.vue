@@ -11,21 +11,21 @@
                         <select
                             v-model="paginate"
                             class="form-control form-control-sm">
-                            <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="20">20</option>
+                            <option value="30">30</option>
                         </select>
-                    </div>
-
-                    <div class="col-md-4">
-                <input v-model.lazy="search" type="search" class="form-control"/>
+                
+                    <div class="ml-15 col-md-4">
+                <input v-model="search" type="search" class="form-control"
+                placeholder="Search"/>
+            </div>
             </div>
 
-                </div>
-               
+                </div> 
         </div>
 
-
+<br>
 
             <div class=" ml-8 overflow-x-auto">
                 <div class=" ml-8 bg-white shadow-md rounded ">
@@ -44,15 +44,15 @@
         </tr>
     </thead>
     <tbody>
-            <tr v-for="item in internlist" :key="item.id">
-                <td class="p-3 text-center">{{ item.id }}</td>
-                <td class="p-3 text-center">{{ item.last_name }}</td>
-                <td class="p-3 text-center">{{ item.first_name }}</td>
-                <td class="p-3 text-center">{{ item.contact_number }}</td>
-                <td class="p-3 text-center">{{ item.department }}</td>
-                <td class="p-3 text-center">{{ item.position }}</td>
-                <td class="p-3 text-center">{{ item.intern_start }}</td>
-                <td class="p-3 text-center">{{ item.intern_end }}</td>
+            <tr v-for="intern in internlists" :key="intern.id">
+                <td class="p-3 text-center">{{ intern.id }}</td>
+                <td class="p-3 text-center">{{ intern.last_name }}</td>
+                <td class="p-3 text-center">{{ intern.first_name }}</td>
+                <td class="p-3 text-center">{{ intern.contact_number }}</td>
+                <td class="p-3 text-center">{{ intern.department }}</td>
+                <td class="p-3 text-center">{{ intern.position }}</td>
+                <td class="p-3 text-center">{{ intern.intern_start }}</td>
+                <td class="p-3 text-center">{{ intern.intern_end }}</td>
                 <td class="p-3 text-center">
 
 
@@ -73,7 +73,11 @@
                 </div>
                     </div>
 
-
+                           <div class="row mt-4">
+                <div class="col-sm-6 offset-5">
+                        <pagination :data="internlists" @pagination-change-page="getInternlists"></pagination>
+                </div>
+                </div>
 
                     </div>
                 </div>
@@ -89,16 +93,23 @@
 export default {
      data(){
          return{
-                internlist: {},
+                internlists: {},
                 
          }
      },
 
-      mounted() {
-          axios.get('/api/internlists')
+     methods: {
+         getInternlists(page = 1){
+                axios.get('/api/internlists?page=' + page)
              .then(response =>{
-                this.internlist = response.data.data;
+                this.internlists = response.data;
         });
+             
+         }
+     },
+
+      mounted() {
+            this.getInternlists();
     }
 };
    
