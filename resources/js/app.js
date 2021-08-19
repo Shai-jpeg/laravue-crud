@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+ import "tailwindcss/tailwind.css";
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -20,7 +21,9 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('internlist-component', require('./components/InternlistComponent.vue').default);
+Vue.component('intern-component', require('./components/InternComponent.vue').default);
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,6 +31,6 @@ Vue.component('internlist-component', require('./components/InternlistComponent.
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+ const app = new Vue({
+    el: "#app"
 });

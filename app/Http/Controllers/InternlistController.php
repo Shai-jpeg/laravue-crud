@@ -21,7 +21,7 @@ class InternlistController extends Controller
 
     public function create()
     {
-        return view('add');
+        return view('create');
     }
 
     public function store(Request $request)

@@ -46,7 +46,7 @@
                 <strong  class="block text-gray-700 text-sm font-bold mb-2">Last Name:</strong>
                 <input type="text" name="last_name"  
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.last_name"
+               
                 />
             </div>
         </div>
@@ -55,7 +55,7 @@
                 
                 <strong class="block text-gray-700 text-sm font-bold mb-2">First Name:</strong>
                 <input type="text" name="first_name"  class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.first_name"
+                
                
                 />
             </div>
@@ -65,7 +65,7 @@
                 <strong  class="block text-gray-700 text-sm font-bold mb-2">Date of Birth:</strong>
                 <input type="date" name="date_of_birth"  
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.date_of_birth"
+               
                 
                 />
             </div>
@@ -75,7 +75,7 @@
                 <strong  class="block text-gray-700 text-sm font-bold mb-2">Contact Number:</strong>
                 <input type="text" name="contact_number"  
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.contact_number"
+               
                 />
             </div>
         </div>
@@ -84,7 +84,7 @@
                 <strong class="block text-gray-700 text-sm font-bold mb-2">Email Address:</strong>
                 <input type="email" name="email_address"
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.email_address"
+               
                 
                 />
             </div>
@@ -93,7 +93,7 @@
                 <strong class="block text-gray-700 text-sm font-bold mb-2">Complete Address:</strong>
                 <input type="address" name="address"
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.address"
+                
                 
                 />
             </div>
@@ -103,7 +103,7 @@
                 <strong  class="block text-gray-700 text-sm font-bold mb-2">Department:</strong>
                 <input type="text" name="department"  
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.department"
+           
                 />
             </div>
         </div>
@@ -112,7 +112,7 @@
                 <strong  class="block text-gray-700 text-sm font-bold mb-2">Position:</strong>
                 <input type="text" name="position"  
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.position"
+               
                 />
             </div>
         </div>
@@ -121,7 +121,7 @@
                 <strong  class="block text-gray-700 text-sm font-bold mb-2">Intern Start:</strong>
                 <input type="date" name="intern_start" 
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.intern_start"
+              
                 />
             </div>
         </div>
@@ -130,7 +130,7 @@
                 <strong  class="block text-gray-700 text-sm font-bold mb-2">Intern End:</strong>
                 <input type="date" name="intern_end"
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
-                v-models="form.intern_end"
+              
                 />
             </div>
         </div>
@@ -140,7 +140,6 @@
                 <input type="text" name="required_hours"  
                 class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-purple-500"
                 
-                v-models="form.required_hours"
                 />
             </div>
 

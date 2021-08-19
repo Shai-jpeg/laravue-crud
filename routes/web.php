@@ -24,7 +24,7 @@ Route::get('create',[InternlistController::class, 'index']);
 
 
 Route::get('/create', function () {
-    return view('add');
+    return view('create');
 })->name('create');
 
 Route::get('/edit', function () {
