@@ -1,5 +1,8 @@
 <?php
 
+
+
+use App\Http\Controllers\InternlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/create',[InternlistController::class, 'index']);
+Route::get('create',[InternlistController::class, 'index']);
+
+
+Route::get('/internlists', [InternlistController::class,'index']);
+
+
+Route::resource('internlists', InternlistController::class);

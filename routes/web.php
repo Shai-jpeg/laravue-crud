@@ -19,9 +19,6 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/create',[InternlistController::class, 'index']);
-Route::get('create',[InternlistController::class, 'index']);
-
 
 Route::get('/create', function () {
     return view('create');
@@ -35,8 +32,3 @@ Route::get('/show', function () {
     return view('show');
 })->name('show');
 
-
-Route::resource('internlists', InternlistController::class);
-
-
-Route::get('/{any}', 'App\Http\Controllers\PagesController@index')->where('any', '.*');

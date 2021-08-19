@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Internlist;
+use App\Http\Resources\InternlistResource;
 use Illuminate\Http\Request;
 
 class InternlistController extends Controller
@@ -12,10 +13,8 @@ class InternlistController extends Controller
     public function index()
     {
 
-        $internlists = Internlist::latest()->paginate(10);
-
-        return view('create', compact('internlists'))
-        ->with('i', (request()->input('page',1)-1) *10);
+        $internlists = Internlist::all();
+        return InternlistResource::collection($internlists);
     }
 
 
@@ -33,6 +32,7 @@ class InternlistController extends Controller
             'date_of_birth' => 'required',
             'contact_number' => 'required',
             'email_address' => 'required',
+            'address' => 'required',
             'department' => 'required',
             'position' => 'required',
             'intern_start'=> 'required',
@@ -42,7 +42,7 @@ class InternlistController extends Controller
 
         Internlist::create($request->all());
 
-        return redirect()->route('internlists')
+        return redirect()->route('create')
         ->with('success', 'Created Succesfully');
     }
 
@@ -67,6 +67,7 @@ class InternlistController extends Controller
             'date_of_birth' => 'required',
             'contact_number' => 'required',
             'email_address' => 'required',
+            'address' => 'required',
             'department' => 'required',
             'position' => 'required',
             'intern_start'=> 'required',
@@ -82,16 +83,17 @@ class InternlistController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'contact_number' =>  $request->contact_number,
             'email_address' =>  $request->email_address,
+            'address' => $request->address,
             'department' =>  $request->department,
             'position' =>  $request->position,
             'intern_start'=>  $request->intern_start,
             'intern_end' =>  $request->intern_end,
-            'requried_hours' => $request->required_ojt_hours,
+            'required_hours' => $request->required_hours,
 
         );
 
             Internlist::whereId($id)->update($internlists);
-        return redirect()->route('index')
+        return redirect()->route('create')
             ->with('success', 'Updated successfully');
         
     }
@@ -100,7 +102,7 @@ class InternlistController extends Controller
         $internlists = Internlist::findOrfail($id);
         $internlists->delete();
 
-        return redirect()->route('index')
+        return redirect()->route('create')
             ->with('success', 'Deleted successfully');
     }    
 }
