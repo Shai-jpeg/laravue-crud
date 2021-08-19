@@ -44,7 +44,7 @@
         </tr>
     </thead>
     <tbody>
-            <tr v-for="intern in internlists" :key="intern.id">
+            <tr v-for="intern in internlists.data" :key="intern.id">
                 <td class="p-3 text-center">{{ intern.id }}</td>
                 <td class="p-3 text-center">{{ intern.last_name }}</td>
                 <td class="p-3 text-center">{{ intern.first_name }}</td>
@@ -94,13 +94,20 @@ export default {
      data(){
          return{
                 internlists: {},
-                
+                paginate: 10,
          }
      },
 
+       watch:{
+         paginate: function(){
+             this.getInternlists();     
+        }
+       },
+
      methods: {
          getInternlists(page = 1){
-                axios.get('/api/internlists?page=' + page)
+                axios.get('/api/internlists?page=' + page + 
+           'paginate=' + this.paginate)
              .then(response =>{
                 this.internlists = response.data;
         });

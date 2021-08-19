@@ -27,5 +27,6 @@ class Internlist extends Model
         'required_hours'
     ];
 
+    
 
 }

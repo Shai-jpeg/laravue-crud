@@ -1974,15 +1974,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      internlists: {}
+      internlists: {},
+      paginate: 10
     };
+  },
+  watch: {
+    paginate: function paginate() {
+      this.getInternlists();
+    }
   },
   methods: {
     getInternlists: function getInternlists() {
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/internlists?page=' + page).then(function (response) {
+      axios.get('/api/internlists?page=' + page + 'paginate=' + this.paginate).then(function (response) {
         _this.internlists = response.data;
       });
     }
@@ -38767,7 +38773,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.internlists, function(intern) {
+                  _vm._l(_vm.internlists.data, function(intern) {
                     return _c("tr", { key: intern.id }, [
                       _c("td", { staticClass: "p-3 text-center" }, [
                         _vm._v(_vm._s(intern.id))

@@ -13,7 +13,11 @@ class InternlistController extends Controller
     public function index()
     {
 
-        $internlists = Internlist::all();
+        $paginate = request('paginate',10);
+        
+
+        $internlists = Internlist::latest()->paginate($paginate);
+        
         return InternlistResource::collection($internlists);
     }
 
