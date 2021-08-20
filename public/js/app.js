@@ -2089,6 +2089,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       internlists: {},
       paginate: 10,
+      search: "",
       form: {
         last_name: null,
         first_name: null,
@@ -2108,6 +2109,9 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     paginate: function paginate() {
       this.getInternlists();
+    },
+    search: function search() {
+      this.getInternlists();
     }
   },
   methods: {
@@ -2115,41 +2119,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/internlists?page=' + page + '&paginate=' + this.paginate).then(function (response) {
+      axios.get('/api/internlists?page=' + page + '&paginate=' + this.paginate + '&search=' + this.search).then(function (response) {
         _this.internlists = response.data;
-      });
-    },
-    remove: function remove(internlistId) {
-      var _this2 = this;
-
-      axios["delete"]('/api/internlists/delete/' + internlistId).then(function (response) {
-        alert("Deleted Successfully");
-
-        _this2.getInternlists();
-      });
-    },
-    edit: function edit(intern) {
-      this.form.last_name = intern.last_name;
-      this.form.first_name = intern.first_name;
-      this.form.date_of_birth = intern.date_of_birth;
-      this.form.contact_number = intern.contact_number;
-      this.form.email_address = intern.email_address;
-      this.form.address = intern.address;
-      this.form.department = intern.department;
-      this.form.position = intern.position;
-      this.form.intern_start = intern.intern_start;
-      this.form.intern_end = intern.intern_end;
-      this.form.required_hours = intern.required_hours;
-      this.selectedId = intern.id;
-      $("#editModal").modal("show");
-    },
-    save: function save() {
-      var vm = this;
-      axios.put("/internlists/edit/".concat(vm.selectedId), this.form).then(function (response) {
-        alert("Successfully updated");
-        this.getInternlists();
-      })["catch"](function (error) {
-        console.log(error);
       });
     }
   },

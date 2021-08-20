@@ -27,5 +27,20 @@ class Internlist extends Model
         'required_hours',
     ];
 
+    public function scopeSearch($query,$term)
+    {
+        $term = "%$term%";
+
+        $query->where(function($query) use ($term){
+            $query->where('last_name', 'like', $term)
+            ->orWhere('first_name', 'like', $term)
+            ->orWhere('department', 'like', $term)
+            ->orWhere('position', 'like', $term)
+            ->orWhere('intern_start', 'like', $term)
+            ->orWhere('intern_end', 'like', $term);
+
+
+        });
+    }
 
 }

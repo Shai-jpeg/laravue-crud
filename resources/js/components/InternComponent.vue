@@ -210,6 +210,7 @@ export default {
 
                 internlists: {},
                 paginate: 10,
+                search: "",
                 form:{
                     last_name: null,
                     first_name: null,
@@ -230,6 +231,9 @@ export default {
        watch:{
          paginate: function(){
              this.getInternlists();     
+        },
+        search: function(){
+            this.getInternlists();
         }
 
        },
@@ -237,50 +241,14 @@ export default {
      methods: {
          getInternlists(page = 1){
                 axios.get('/api/internlists?page=' + page + 
-           '&paginate=' + this.paginate
-           )
-         
-             .then(response =>{
+           '&paginate=' + this.paginate +
+           '&search=' + this.search) 
+          .then(response =>{
                 this.internlists = response.data;
         });
           
      },
 
-        remove(internlistId){
-            axios.delete('/api/internlists/delete/' + internlistId)
-            .then(response =>{
-                alert("Deleted Successfully");
-                this.getInternlists();
-            });
-        },
-
-        edit(intern){
-                this.form.last_name = intern.last_name;
-                this.form.first_name = intern.first_name;
-                this.form.date_of_birth = intern.date_of_birth;
-                this.form.contact_number = intern.contact_number;
-                this.form.email_address = intern.email_address;
-                this.form.address = intern.address;
-                this.form.department = intern.department;
-                this.form.position = intern.position;
-                this.form.intern_start = intern.intern_start;
-                this.form.intern_end= intern.intern_end;
-                this.form.required_hours = intern.required_hours;
-                this.selectedId = intern.id;
-                $("#editModal").modal("show");
-        },
-
-        save(){
-            const vm = this;
-            axios.put(`/internlists/edit/${vm.selectedId}`, this.form)
-            .then(function(response){
-                alert("Successfully updated");
-                this.getInternlists();
-            })
-            .catch(function(error){
-                console.log(error);
-            });
-        }
      },
 
       mounted() {

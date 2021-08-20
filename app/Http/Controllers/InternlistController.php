@@ -14,10 +14,10 @@ class InternlistController extends Controller
     {
 
         $paginate = request('paginate',10);
-
+        $search_term = request('search', '');
 
         $internlists = Internlist::latest()
-       
+        ->search(trim($search_term))
         ->paginate($paginate);
         return InternlistResource::collection($internlists);
     }
