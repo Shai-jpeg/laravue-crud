@@ -1971,11 +1971,138 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       internlists: {},
-      paginate: 10
+      paginate: 10,
+      form: {
+        last_name: null,
+        first_name: null,
+        date_of_birth: null,
+        contact_number: null,
+        email_address: null,
+        address: null,
+        department: null,
+        position: null,
+        intern_start: null,
+        intern_end: null,
+        required_hours: null
+      },
+      selectedId: null
     };
   },
   watch: {
@@ -1988,8 +2115,41 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/internlists?page=' + page + 'paginate=' + this.paginate).then(function (response) {
+      axios.get('/api/internlists?page=' + page + '&paginate=' + this.paginate).then(function (response) {
         _this.internlists = response.data;
+      });
+    },
+    remove: function remove(internlistId) {
+      var _this2 = this;
+
+      axios["delete"]('/api/internlists/delete/' + internlistId).then(function (response) {
+        alert("Deleted Successfully");
+
+        _this2.getInternlists();
+      });
+    },
+    edit: function edit(intern) {
+      this.form.last_name = intern.last_name;
+      this.form.first_name = intern.first_name;
+      this.form.date_of_birth = intern.date_of_birth;
+      this.form.contact_number = intern.contact_number;
+      this.form.email_address = intern.email_address;
+      this.form.address = intern.address;
+      this.form.department = intern.department;
+      this.form.position = intern.position;
+      this.form.intern_start = intern.intern_start;
+      this.form.intern_end = intern.intern_end;
+      this.form.required_hours = intern.required_hours;
+      this.selectedId = intern.id;
+      $("#editModal").modal("show");
+    },
+    save: function save() {
+      var vm = this;
+      axios.put("/internlists/edit/".concat(vm.selectedId), this.form).then(function (response) {
+        alert("Successfully updated");
+        this.getInternlists();
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
@@ -38688,14 +38848,14 @@ var render = function() {
             _c("div", [
               _c(
                 "div",
-                { staticClass: "ml-8 d-flex align-items-center ml-4 " },
+                {
+                  staticClass:
+                    "d-flex align-items-center ml-4 col-span-3 py-1 px-2 "
+                },
                 [
                   _c(
                     "label",
-                    {
-                      staticClass: "text-nowrap mr-2 mb-0",
-                      attrs: { for: "paginate" }
-                    },
+                    { staticClass: "px-2 mt-2", attrs: { for: "paginate" } },
                     [_vm._v("Page")]
                   ),
                   _vm._v(" "),
@@ -38734,101 +38894,802 @@ var render = function() {
                       _vm._v(" "),
                       _c("option", { attrs: { value: "30" } }, [_vm._v("30")])
                     ]
-                  ),
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-span-2" }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "ml-8 pt-2 relative mx-auto text-gray-600" },
+                [
+                  _c("i", { staticClass: "fa fa-search" }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "ml-15 col-md-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.search,
-                          expression: "search"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "search", placeholder: "Search" },
-                      domProps: { value: _vm.search },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.search = $event.target.value
-                        }
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search,
+                        expression: "search"
                       }
-                    })
-                  ])
+                    ],
+                    staticClass:
+                      "ml-8 border-2 border-gray-300 bg-white h-10 px-5 pr-16 \n                        rounded-lg text-sm focus:outline-none",
+                    attrs: {
+                      type: "text",
+                      name: "search",
+                      placeholder: "Search"
+                    },
+                    domProps: { value: _vm.search },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.search = $event.target.value
+                      }
+                    }
+                  })
                 ]
               )
             ])
-          ]),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("div", { staticClass: " ml-8 overflow-x-auto" }, [
-            _c("div", { staticClass: " ml-8 bg-white shadow-md rounded " }, [
-              _c("table", { staticClass: "border-collapse w-full" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.internlists.data, function(intern) {
-                    return _c("tr", { key: intern.id }, [
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.id))
-                      ]),
+          ])
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: " ml-8 overflow-x-auto" }, [
+          _c("div", { staticClass: " ml-8 bg-white shadow-md rounded " }, [
+            _c("table", { staticClass: "border-collapse w-full" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.internlists.data, function(intern) {
+                  return _c("tr", { key: intern.id }, [
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.id))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.last_name))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.first_name))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.contact_number))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.department))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.position))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.intern_start))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _vm._v(_vm._s(intern.intern_end))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "p-3 text-center" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition",
+                          on: {
+                            click: function($event) {
+                              return _vm.edit(intern)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-edit",
+                            attrs: { "aria-hdden": "true" }
+                          })
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.last_name))
-                      ]),
+                      _vm._m(1, true),
                       _vm._v(" "),
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.first_name))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.contact_number))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.department))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.position))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.intern_start))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "p-3 text-center" }, [
-                        _vm._v(_vm._s(intern.intern_end))
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1, true)
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition",
+                          on: {
+                            click: function($event) {
+                              return _vm.remove(intern.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-trash",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        ]
+                      )
                     ])
-                  }),
-                  0
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row mt-4" }, [
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-sm-6 offset-5" },
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "editModal",
+                  tabindex: "-1",
+                  role: "dialog",
+                  "aria-labelledby": "exampleModalCenterTitle",
+                  "aria-hidden": "true"
+                }
+              },
               [
-                _c("pagination", {
-                  attrs: { data: _vm.internlists },
-                  on: { "pagination-change-page": _vm.getInternlists }
-                })
-              ],
-              1
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog modal-dialog-centered",
+                    attrs: { role: "document" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "p-2 container mx-auto max-w-full" },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "p-4 bg-gray-300 border-2 border-gray-400 m-auto"
+                              },
+                              [
+                                _c("div", { staticClass: "p-2" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Last Name")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.last_name,
+                                                expression: "form.last_name"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "text",
+                                              name: "last_name"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.last_name
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "last_name",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("First Name")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.first_name,
+                                                expression: "form.first_name"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "text",
+                                              name: "first_name"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.first_name
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "first_name",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Date of Birth")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.date_of_birth,
+                                                expression: "form.date_of_birth"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "date",
+                                              name: "date_of_birth"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.date_of_birth
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "date_of_birth",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Contact Number")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.contact_number,
+                                                expression:
+                                                  "form.contact_number"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "text",
+                                              name: "contact_number"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.contact_number
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "contact_number",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Email Address")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.email_address,
+                                                expression: "form.email_address"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "email",
+                                              name: "email_address"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.email_address
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "email_address",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Department")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.department,
+                                                expression: "form.department"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "text",
+                                              name: "department"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.department
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "department",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Required OJT Hours")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.required_hours,
+                                                expression:
+                                                  "form.required_hours"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "text",
+                                              name: "required_hours"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.required_hours
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "required_hours",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Position")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.position,
+                                                expression: "form.position"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "text",
+                                              name: "position"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.position
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "position",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "grid grid-cols-1 mt-5 mx-7"
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                        },
+                                        [_vm._v("Address")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.address,
+                                            expression: "form.address"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                        attrs: {
+                                          type: "text",
+                                          name: "address"
+                                        },
+                                        domProps: { value: _vm.form.address },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "address",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Intern Start")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.intern_start,
+                                                expression: "form.intern_start"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "date",
+                                              name: "intern_start"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.intern_start
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "intern_start",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "grid grid-cols-1" },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                            },
+                                            [_vm._v("Intern End")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.intern_end,
+                                                expression: "form.intern_end"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+                                            attrs: {
+                                              type: "date",
+                                              name: "intern_end"
+                                            },
+                                            domProps: {
+                                              value: _vm.form.intern_end
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "intern_end",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5"
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2",
+                                          attrs: { type: "submit" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.save()
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Update")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2",
+                                          attrs: {
+                                            type: "button",
+                                            "data-dismiss": "modal"
+                                          }
+                                        },
+                                        [_vm._v("Close")]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]
             )
           ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mt-4" }, [
+          _c(
+            "div",
+            { staticClass: "col-sm-6 offset-5" },
+            [
+              _c("pagination", {
+                attrs: { data: _vm.internlists },
+                on: { "pagination-change-page": _vm.getInternlists }
+              })
+            ],
+            1
+          )
         ])
       ])
     ])
@@ -38928,47 +39789,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "p-3 text-center" }, [
+    return _c(
+      "button",
+      {
+        staticClass:
+          "bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition"
+      },
+      [_c("i", { staticClass: "fa fa-eye", attrs: { "aria-hidden": "true" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
       _c(
-        "button",
-        {
-          staticClass:
-            "bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition"
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-edit",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [_vm._v("Edit Form")]
       ),
       _vm._v(" "),
       _c(
         "button",
         {
-          staticClass:
-            "bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition"
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
         },
-        [
-          _c("i", {
-            staticClass: "fa fa-eye",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass:
-            "bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition"
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-trash",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   }

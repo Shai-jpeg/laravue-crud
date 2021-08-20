@@ -14,10 +14,11 @@ class InternlistController extends Controller
     {
 
         $paginate = request('paginate',10);
-        
 
-        $internlists = Internlist::latest()->paginate($paginate);
-        
+
+        $internlists = Internlist::latest()
+       
+        ->paginate($paginate);
         return InternlistResource::collection($internlists);
     }
 
@@ -101,12 +102,10 @@ class InternlistController extends Controller
             ->with('success', 'Updated successfully');
         
     }
-    public function destroy($id)
+    public function destroy(Internlist $internlists)
     {
-        $internlists = Internlist::findOrfail($id);
-        $internlists->delete();
-
-        return redirect()->route('create')
-            ->with('success', 'Deleted successfully');
+     $internlists->delete();
+     return response()->noContent();
+    
     }    
 }

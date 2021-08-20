@@ -24,9 +24,8 @@ class Internlist extends Model
         'position',
         'intern_start',
         'intern_end',
-        'required_hours'
+        'required_hours',
     ];
 
-    
 
 }
