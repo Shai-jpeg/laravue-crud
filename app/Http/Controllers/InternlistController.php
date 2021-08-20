@@ -63,7 +63,7 @@ class InternlistController extends Controller
         return view('edit', compact('internlists'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Internlists $internlists)
     {
         $request->validate([
            
@@ -81,31 +81,16 @@ class InternlistController extends Controller
 
         ]);
 
-        $internlists=array(
-           
-            'last_name' =>  $request->last_name,
-            'first_name' => $request->first_name,
-            'date_of_birth' => $request->date_of_birth,
-            'contact_number' =>  $request->contact_number,
-            'email_address' =>  $request->email_address,
-            'address' => $request->address,
-            'department' =>  $request->department,
-            'position' =>  $request->position,
-            'intern_start'=>  $request->intern_start,
-            'intern_end' =>  $request->intern_end,
-            'required_hours' => $request->required_hours,
-
-        );
-
-            Internlist::whereId($id)->update($internlists);
+        $internlists->update($request->all());
         return redirect()->route('create')
             ->with('success', 'Updated successfully');
         
     }
-    public function destroy(Internlist $internlists)
+    public function destroy(Internlist $internlist)
     {
-     $internlists->delete();
-     return response()->noContent();
+    
+      $internlist->delete();
+      return response()->noContent();
     
     }    
 }

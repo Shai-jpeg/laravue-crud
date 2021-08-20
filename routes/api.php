@@ -21,13 +21,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::get('/create',[InternlistController::class, 'index']);
 Route::get('create',[InternlistController::class, 'index']);
 
 
 Route::get('/internlists', [InternlistController::class,'index']);
-Route::delete('/internlists/{internlists}',[InternlistController::class, 'destroy']);
 
+Route::delete('/internlists/{internlist}',[InternlistController::class, 'destroy']);
+
+Route::put('/internlists/{selectedId}', [InternlistController::class, 'update']);
 
 Route::resource('internlists', InternlistController::class);

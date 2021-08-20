@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
     <script src="https://use.fontawesome.com/b494c279b5.js"></script>
  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
      <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 </head>
-
           
 <body class="bg-gradient-to-b from-gray-400 to-green-500 opacity-75 inset-0 z-0">
   
@@ -31,17 +33,6 @@
       </div>
     </div>
 
-    
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Kindly please enter information of Intern</strong>
-        <ul>
-            @foreach ($errors->all() as $error)
-          
-            @endforeach
-        </ul>
-    </div>
-@endif
   
 <form action="{{ route('internlists.store')}}" method="POST">
     @csrf
@@ -52,12 +43,12 @@
       <div class="grid grid-cols-1">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Last Name</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-         type="text" name="last_name" />
+         type="text" name="last_name"  />
       </div>
       <div class="grid grid-cols-1">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">First Name</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-        type="text" name="first_name" />
+        type="text" name="first_name"/>
       </div>
     </div>
          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
@@ -77,7 +68,7 @@
       <div class="grid grid-cols-1">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Email Address</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-         type="email" name="email_address" />
+         type="email" name="email_address"/>
       </div>
       <div class="grid grid-cols-1">
         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Department</label>
@@ -102,7 +93,7 @@
  <div class="grid grid-cols-1 mt-5 mx-7">
       <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Address</label>
       <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-      type="text" name="address"/>
+      type="text" name="address" />
     </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
