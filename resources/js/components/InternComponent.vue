@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -18,11 +18,10 @@
                     </div>
                 <div class="col-span-2"></div>
 
-                    <div class="pt-2 relative mx-auto text-gray-600">
+                    <div class="d-flex align-items-center ml-4 col-span-3 py-1 px-2">
                      <i class="fa fa-search"></i>
                 <input v-model="search" type="text" name="search"
-                class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 
-                        rounded-lg text-sm focus:outline-none"
+                class="rounded p-1 w-full bg-white"
                          placeholder="Search">
                           </div>
             </div>
@@ -63,10 +62,6 @@
                             <i class="fa fa-edit" aria-hdden="true"></i>
                          </button>
 
-                    <button
-                    class="bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                         </button>
                         <button  @click="remove(intern.id)"
                         class="bg-gray-500 text-center m py-1 px-1 rounded hover:bg-green-400  transition">
                             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -76,97 +71,95 @@
     </tbody>
             </table>
 
-          <div class="modal fade" id="editModal" tabindex="-1" role="dialog" 
-          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Edit Form</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      
+        
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Last Name</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Last Name</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-         type="text" name="last_name" v-modal="form.last_name" />
+         type="text" name="last_name" v-model="form.last_name" />
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">First Name</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">First Name</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-        type="text" name="first_name" v-modal="form.first_name"/>
+        type="text" name="first_name" v-model="form.first_name"/>
       </div>
     </div>
          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Date of Birth</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Date of Birth</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-         type="date" name="date_of_birth" v-modal="form.date_of_birth"/>
+         type="date" name="date_of_birth" v-model="form.date_of_birth"/>
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Contact Number</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Contact Number</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-        type="text" name="contact_number" v-modal="form.contact_number" />
+        type="text" name="contact_number" v-model="form.contact_number" />
       </div>
     </div>
 
    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Email Address</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Email Address</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-         type="email" name="email_address" v-modal="form.email_address"/>
+         type="email" name="email_address" v-model="form.email_address"/>
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Department</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Department</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-        type="text" name="department" v-modal="form.department"/>
+        type="text" name="department" v-model="form.department"/>
       </div>
     </div>
 
    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Required OJT Hours</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Required OJT Hours</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-         type="text" name="required_hours" v-modal="form.required_hours" />
+         type="text" name="required_hours" v-model="form.required_hours" />
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Position</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Position</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-        type="text" name="position" v-modal="form.position"/>
+        type="text" name="position" v-model="form.position"/>
       </div>
     </div>
 
  <div class="grid grid-cols-1 mt-5 mx-7">
-      <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Address</label>
+      <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Address</label>
       <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-      type="text" name="address" v-modal="form.address"/>
+      type="text" name="address" v-model="form.address"/>
     </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Intern Start</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Intern Start</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-         type="date" name="intern_start" v-modal="form.intern_start"/>
+         type="date" name="intern_start" v-model="form.intern_start"/>
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Intern End</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Intern End</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-        type="date" name="intern_end" v-modal="form.intern_end" />
+        type="date" name="intern_end" v-model="form.intern_end" />
       </div>
-    </div>
-    </div>
-    
-    </div>
+      </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2" data-dismiss="modal">Close</button>
-        <button @click= "save()" type="submit" class="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
+  </div>
+</div>
+
   </div>
           </div>
           </div>
@@ -238,7 +231,7 @@ export default {
             },
 
             edit(intern){
-              $('#editModal').modal('show');
+             
               this.form.last_name = intern.last_name;
               this.form.first_name = intern.first_name;
               this.form.date_of_birth = intern.date_of_birth;
@@ -250,33 +243,35 @@ export default {
               this.form.intern_start = intern.intern_start;
               this.form.intern_end = intern.intern_end;
               this.form.required_hours = intern.required_hours;
+              this.selectedId = intern.id;
+               $('#editModal').modal('show');
             },
-     
+
+            save(){
+              const vm = this;
+              axios.put(`internlists/${vm.selectedId}`,{
+                  last_name: this.form.last_name,
+                  first_name: this.form.first_name,
+                  date_of_birth: this.form.date_of_birth,
+                  contact_number: this.form.contact_number,
+                  email_address: this.form.email_address,
+                  address: this.form.address,
+                  department: this.form.department,
+                  position: this.form.position,
+                  intern_start: this.form.intern_start,
+                  intern_end: this.form.intern_end,
+                  required_hours: this.form.required_hours
+              })
+              .then(function(response) {
+                alert("Updated Successfully");
+                $('#editModal').modal('hide');
+                vm.getInternlists();
+              })
+              .catch(function(error){
+                console.log(error);
+              });
+            }
         
-        save() {
-            const vm = this;
-            axios.put(`internlists/${vm.selectedId}`, {
-                     last_name: this.form.last_name,
-                      first_name: this.form.first_name,
-                    date_of_birth: this.form.date_of_birth,
-                    contact_number: this.form.contact_number,
-                    email_address: this.form.email_address,
-                    address: this.form.address,
-                    department: this.form.department,
-                    position: this.form.position,
-                    intern_start: this.form.intern_start,
-                    intern_end: this.form.intern_end,
-                    required_hours: this.form.required_hours
-                })
-                .then(function(response) {
-                    alert("Sucessfully updated");
-                    $("#editModal").modal("hide");
-                    vm.getInternlists();
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }
     }, 
       mounted() {
     this.getInternlists();

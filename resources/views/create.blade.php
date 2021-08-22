@@ -9,15 +9,14 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
     <script src="https://use.fontawesome.com/b494c279b5.js"></script>
- 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
      <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 </head>
           
 <body class="bg-gradient-to-b from-gray-400 to-green-500 opacity-75 inset-0 z-0">
-  
+  <br><br><br><br>
 <div id = "app">
 
 <div class="flex h-screen items-center justify-center  mt-10 mb-10">
@@ -37,28 +36,26 @@
 <form action="{{ route('internlists.store')}}" method="POST">
     @csrf
 
-    <div class="row">
-        
-           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-2 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Last Name</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Last Name</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
          type="text" name="last_name"  />
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">First Name</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">First Name</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
         type="text" name="first_name"/>
       </div>
     </div>
          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Date of Birth</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Date of Birth</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
          type="date" name="date_of_birth" />
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Contact Number</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Contact Number</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
         type="text" name="contact_number" />
       </div>
@@ -66,12 +63,12 @@
 
    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Email Address</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Email Address</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
          type="email" name="email_address"/>
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Department</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Department</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
         type="text" name="department" />
       </div>
@@ -79,47 +76,46 @@
 
    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Required OJT Hours</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Required OJT Hours</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
          type="text" name="required_hours" />
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Position</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Position</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
         type="text" name="position" />
       </div>
     </div>
 
  <div class="grid grid-cols-1 mt-5 mx-7">
-      <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Address</label>
+      <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Address</label>
       <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
       type="text" name="address" />
     </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Intern Start</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Intern Start</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
          type="date" name="intern_start" />
       </div>
       <div class="grid grid-cols-1">
-        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Intern End</label>
+        <label class="uppercase md:text-sm text-xs text-black text-light font-semibold">Intern End</label>
         <input class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
         type="date" name="intern_end" />
       </div>
     </div>
-
 
         <div class="flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5">
             <button  
             class="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
             type="submit" >Create</button>
         </div>
-    </div>
+
 </form>   
   </div>
 </div>
-
+<br><br><br><br>
             <intern-component></intern-component>
 
 <br>

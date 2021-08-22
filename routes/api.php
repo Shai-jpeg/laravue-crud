@@ -32,3 +32,4 @@ Route::delete('/internlists/{internlist}',[InternlistController::class, 'destroy
 Route::put('/internlists/{selectedId}', [InternlistController::class, 'update']);
 
 Route::resource('internlists', InternlistController::class);
+
