@@ -26,10 +26,7 @@ Route::get('create',[InternlistController::class, 'index']);
 
 
 Route::get('/internlists', [InternlistController::class,'index']);
-
 Route::delete('/internlists/{internlist}',[InternlistController::class, 'destroy']);
-
-Route::put('/internlists/{selectedId}', [InternlistController::class, 'update']);
+Route::put('/internlists/{internlist}', [InternlistController::class, 'update']);
 
 Route::resource('internlists', InternlistController::class);
-

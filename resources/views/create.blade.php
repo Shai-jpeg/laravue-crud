@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crud Mini Project</title>
+    <title>Intern Lists</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
@@ -28,7 +28,7 @@
 
     <div class="flex justify-center">
       <div class="flex">
-        <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Internlist Form</h1>
+        <h1 class="text-gray-600 font-bold md:text-2xl text-xl">Intern Form</h1>
       </div>
     </div>
 

@@ -6,7 +6,8 @@
                   
             <div>
                 <div>
-                    <div class="d-flex align-items-center ml-4 col-span-3 py-1 px-2 ">
+                  <div class="grid grid-cols-7 mt-3 px-2">
+                    <div class="d-flex align-items-center ml-4 col-span-2 ">
                         <label for="paginate" class="px-2 mt-2">Page</label>
                         <select
                             v-model="paginate"
@@ -24,6 +25,7 @@
                 class="rounded p-1 w-full bg-white"
                          placeholder="Search">
                           </div>
+                  </div>
             </div>
 
                 </div> 
@@ -75,7 +77,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Intern Form</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -153,8 +155,10 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn w-auto bg-purple-300 hover:bg-purple-500 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+         data-bs-dismiss="modal">Close</button>
+        <button class="btn w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+         @click="save()" type="submit">Update</button>
       </div>
     </div>
   </div>
@@ -231,7 +235,7 @@ export default {
             },
 
             edit(intern){
-             
+               $('#editModal').modal('show');
               this.form.last_name = intern.last_name;
               this.form.first_name = intern.first_name;
               this.form.date_of_birth = intern.date_of_birth;
@@ -244,12 +248,11 @@ export default {
               this.form.intern_end = intern.intern_end;
               this.form.required_hours = intern.required_hours;
               this.selectedId = intern.id;
-               $('#editModal').modal('show');
             },
 
             save(){
               const vm = this;
-              axios.put(`internlists/${vm.selectedId}`,{
+              axios.put(`api/internlists/${vm.selectedId}`,{
                   last_name: this.form.last_name,
                   first_name: this.form.first_name,
                   date_of_birth: this.form.date_of_birth,

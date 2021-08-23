@@ -32,3 +32,5 @@ Route::get('/show', function () {
     return view('show');
 })->name('show');
 
+Route::resource('interlists/{internlist}', InternlistController::class);
+Route::resource('internlists', InternlistController::class);

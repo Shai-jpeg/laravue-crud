@@ -63,7 +63,7 @@ class InternlistController extends Controller
         return view('edit', compact('internlists'));
     }
 
-    public function update(Request $request, Internlists $internlists)
+    public function update(Request $request, Internlist $internlist)
     {
         $request->validate([
            
@@ -77,13 +77,12 @@ class InternlistController extends Controller
             'position' => 'required',
             'intern_start'=> 'required',
             'intern_end' => 'required',
-            'required_hours' => 'required',
+            'required_hours' => 'required'
 
         ]);
 
-        $internlists->update($request->all());
-        return redirect()->route('create')
-            ->with('success', 'Updated successfully');
+        $internlist->update($request->all());
+        return view('create');
         
     }
     public function destroy(Internlist $internlist)
